@@ -22,10 +22,10 @@
                     <td class="py-2 px-4 border-b">{{ $cliente->telefono }}</td>
                     <td class="py-2 px-4 border-b">{{ $cliente->email }}</td>
                     <td class="py-2 px-4 border-b">
-                        <a href="{{ route('clientes.edit', $cliente) }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded mr-2 text-sm cursor-pointer">Editar</a>
+                        <a href="{{ route('clientes.edit', $cliente) }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded mr-2 text-sm">Editar</a>
                         <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" class="inline">
                             @csrf @method('DELETE')
-                            <button type="submit" class="inline-block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm cursor-pointer">Eliminar</button>
+                            <button type="submit" class="inline-block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">Eliminar</button>
                         </form>
                     </td>
                 </tr>
