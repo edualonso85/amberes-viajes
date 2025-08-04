@@ -21,33 +21,7 @@
             </div>
             <div>
                 <label class="block text-sm">Precio</label>
-                <input type="number" name="precio" step="0.01" min="0" class="border rounded px-3 py-2 w-full" required>
-            </div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Agregar</button>
-        </form>
-    </div>
-    <div>
-        <h2 class="text-xl font-semibold mb-2">Productos</h2>
-        <table class="min-w-full bg-white border border-gray-200 rounded shadow">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="py-3 px-4 border-b text-left font-semibold text-gray-700">ID</th>
-                    <th class="py-3 px-4 border-b text-left font-semibold text-gray-700">Nombre</th>
-                    <th class="py-3 px-4 border-b text-left font-semibold text-gray-700">Precio</th>
-                    <th class="py-3 px-4 border-b text-left font-semibold text-gray-700">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($proveedor->productos as $producto)
-                <tr class="hover:bg-blue-50 {{ $loop->even ? 'bg-gray-50' : '' }}">
-                    <td class="py-2 px-4 border-b">{{ $producto->id }}</td>
-                    <td class="py-2 px-4 border-b">{{ $producto->nombre }}</td>
-                    <td class="py-2 px-4 border-b">${{ number_format($producto->precio, 2) }}</td>
-                    <td class="py-2 px-4 border-b">
-                        <a href="#" onclick="editarProducto({{ $producto->id }}, '{{ $producto->nombre }}', '{{ $producto->precio }}')" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded mr-2 text-sm cursor-pointer">Editar</a>
-                        <form action="{{ route('productos.destroy', $producto) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="inline-block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm cursor-pointer">Eliminar</button>
+        <!-- Se eliminaron las referencias a productos -->
                         </form>
                     </td>
                 </tr>

@@ -13,7 +13,4 @@ class Proveedor extends Model
         'nombre', 'telefono', 'email'
     ];
 
-    public function productos() {
-        return $this->hasMany(Producto::class);
-    }
 }

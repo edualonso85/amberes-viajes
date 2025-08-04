@@ -7,18 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('productos', function (Blueprint $table) {
+        Schema::create('vendedores', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proveedor_id');
             $table->string('nombre');
-            $table->decimal('precio', 10, 2);
+            $table->string('apellido');
+            $table->decimal('comision', 10, 2);
+            $table->decimal('impuestos', 10, 2);
             $table->timestamps();
-
-            $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('cascade');
         });
     }
+
     public function down(): void
     {
-        Schema::dropIfExists('productos');
+        Schema::dropIfExists('vendedores');
     }
 };

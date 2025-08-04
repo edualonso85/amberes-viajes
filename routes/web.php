@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -30,13 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('clientes', ClienteController::class);
     Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']);
-    Route::post('proveedores/{proveedor}/productos', [App\Http\Controllers\ProductoController::class, 'store'])->name('proveedores.productos.store');
-    Route::put('productos/{producto}', [App\Http\Controllers\ProductoController::class, 'update'])->name('productos.update');
-    Route::delete('productos/{producto}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('productos.destroy');
+    Route::resource('vendedores', App\Http\Controllers\VendedorController::class)->parameters(['vendedores' => 'vendedor'])->middleware('role:admin');
     Route::post('/logout', function() {
         Auth::logout();
         return redirect('/login');
     })->name('logout');
+    
+    Route::resource('usuarios', App\Http\Controllers\UserController::class)->parameters(['usuarios' => 'user'])->middleware('role:admin');
 });
 
 Auth::routes();

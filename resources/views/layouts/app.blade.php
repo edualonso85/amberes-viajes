@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Amberes Admin</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/mdi/island.svg?color=%230a3d62" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
-    @vite('resources/css/app.css')
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body>
     <div id="app">
@@ -33,6 +35,8 @@
                         <svg x-show="!mini" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5" /></svg>
                         <svg x-show="mini" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16" /></svg>
                     </button>
+                <button @click="sidebarOpen = !sidebarOpen" class="text-gray-500 focus:outline-none lg:hidden cursor-pointer">
+                <button @click="sidebarOpen = false" class="text-gray-500 focus:outline-none cursor-pointer">
                 </div>
                 <nav class="mt-6 flex-1">
                     <ul class="space-y-1">
@@ -48,6 +52,18 @@
                                 <span x-show="!mini">Clientes</span>
                             </a>
                         </li>
+                        @if(auth()->user() && auth()->user()->role !== 'vendedor')
+                            <li>
+                                <a href="{{ route('vendedores.index') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('vendedores.*') ? 'bg-blue-800' : '' }}">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6 5.87v-2a4 4 0 00-3-3.87m6 5.87a4 4 0 01-3-3.87m0 0a4 4 0 00-3-3.87m0 0V7a4 4 0 018 0v2a4 4 0 01-3 3.87z" /></svg>
+                                    <span x-show="!mini">Vendedores</span>
+                                </a>
+                                <a href="{{ route('usuarios.index') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('usuarios.*') ? 'bg-blue-800' : '' }}">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                    <span x-show="!mini">Usuarios</span>
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{{ route('proveedores.index') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('proveedores.*') ? 'bg-blue-800' : '' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v4a1 1 0 001 1h3m10-5h3a1 1 0 011 1v4a1 1 0 01-1 1h-3m-10 0v6a2 2 0 002 2h4a2 2 0 002-2v-6m-8 0h8" /></svg>
@@ -81,4 +97,5 @@
         @endauth
     </div>
 </body>
+@livewireScripts
 </html>
