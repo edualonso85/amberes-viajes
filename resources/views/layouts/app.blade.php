@@ -28,44 +28,41 @@
             }" :class="mini ? 'w-20' : 'w-64'" class="bg-gradient-to-b from-blue-600 to-blue-400 text-white shadow-xl flex flex-col transition-all duration-200">
                 <div class="flex items-center justify-between px-4 py-5 border-b border-blue-500 h-20">
                     <div class="flex items-center gap-3" x-show="!mini">
-                        <svg class="w-9 h-9 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" /></svg>
-                        <span class="font-extrabold text-2xl tracking-tight leading-tight">Amberes Viajes</span>
+                        <span class="font-extrabold text-xl tracking-tight leading-tight">Amberes Viajes</span>
                     </div>
                     <button @click="toggle()" class="ml-auto bg-blue-700 hover:bg-blue-800 rounded-full p-2 transition flex items-center justify-center" :title="mini ? 'Expandir menú' : 'Minimizar menú'">
-                        <svg x-show="!mini" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5" /></svg>
-                        <svg x-show="mini" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16" /></svg>
+                        <svg x-show="!mini" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5" /></svg>
+                        <svg x-show="mini" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16" /></svg>
                     </button>
-                <button @click="sidebarOpen = !sidebarOpen" class="text-gray-500 focus:outline-none lg:hidden cursor-pointer">
-                <button @click="sidebarOpen = false" class="text-gray-500 focus:outline-none cursor-pointer">
                 </div>
                 <nav class="mt-6 flex-1">
                     <ul class="space-y-1">
                         <li>
-                            <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('dashboard') ? 'bg-blue-800' : '' }}">
+                            <a href="{{ route('dashboard') }}" @click.prevent="window.location='{{ route('dashboard') }}'" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('dashboard') ? 'bg-blue-800' : '' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" /></svg>
                                 <span x-show="!mini">Dashboard</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('clientes.index') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('clientes.*') ? 'bg-blue-800' : '' }}">
+                            <a href="{{ route('clientes.index') }}" @click.prevent="window.location='{{ route('clientes.index') }}'" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('clientes.*') ? 'bg-blue-800' : '' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6 5.87v-2a4 4 0 00-3-3.87m6 5.87a4 4 0 01-3-3.87m0 0a4 4 0 00-3-3.87m0 0V7a4 4 0 018 0v2a4 4 0 01-3 3.87z" /></svg>
                                 <span x-show="!mini">Clientes</span>
                             </a>
                         </li>
                         @if(auth()->user() && auth()->user()->role !== 'vendedor')
                             <li>
-                                <a href="{{ route('vendedores.index') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('vendedores.*') ? 'bg-blue-800' : '' }}">
+                                <a href="{{ route('vendedores.index') }}" @click.prevent="window.location='{{ route('vendedores.index') }}'" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('vendedores.*') ? 'bg-blue-800' : '' }}">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6 5.87v-2a4 4 0 00-3-3.87m6 5.87a4 4 0 01-3-3.87m0 0a4 4 0 00-3-3.87m0 0V7a4 4 0 018 0v2a4 4 0 01-3 3.87z" /></svg>
                                     <span x-show="!mini">Vendedores</span>
                                 </a>
-                                <a href="{{ route('usuarios.index') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('usuarios.*') ? 'bg-blue-800' : '' }}">
+                                <a href="{{ route('usuarios.index') }}" @click.prevent="window.location='{{ route('usuarios.index') }}'" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('usuarios.*') ? 'bg-blue-800' : '' }}">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
                                     <span x-show="!mini">Usuarios</span>
                                 </a>
                             </li>
                         @endif
                         <li>
-                            <a href="{{ route('proveedores.index') }}" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('proveedores.*') ? 'bg-blue-800' : '' }}">
+                            <a href="{{ route('proveedores.index') }}" @click.prevent="window.location='{{ route('proveedores.index') }}'" class="flex items-center gap-3 px-6 py-3 rounded-l-full hover:bg-blue-700 transition font-semibold {{ request()->routeIs('proveedores.*') ? 'bg-blue-800' : '' }}">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v4a1 1 0 001 1h3m10-5h3a1 1 0 011 1v4a1 1 0 01-1 1h-3m-10 0v6a2 2 0 002 2h4a2 2 0 002-2v-6m-8 0h8" /></svg>
                                 <span x-show="!mini">Proveedores</span>
                             </a>

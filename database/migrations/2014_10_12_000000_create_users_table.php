@@ -15,11 +15,24 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('telefono')->nullable();
+            $table->string('role')->default('vendedor');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Crear usuario admin por defecto
+        \DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'edualonso85@gmail.com',
+            'telefono' => '2215629699',
+            'role' => 'admin',
+            'password' => \Hash::make('alonso85'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**
