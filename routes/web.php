@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -23,7 +22,9 @@ use Illuminate\Support\Facades\Auth;
 // Rutas de autenticación (Laravel Breeze, Fortify o UI recomendado para login real)
 
 // Redirigir home a login
-Route::get('/', function() { return redirect('/login'); });
+Route::get('/', function () {
+    return redirect('/login');
+});
 Auth::routes();
 
 // Dashboard protegido
@@ -32,12 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('clientes', ClienteController::class);
     Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']);
     Route::resource('vendedores', App\Http\Controllers\VendedorController::class)->parameters(['vendedores' => 'vendedor'])->middleware('role:admin');
-    Route::post('/logout', function() {
-        Auth::logout();
-        return redirect('/login');
-    })->name('logout');
-    
     Route::resource('usuarios', App\Http\Controllers\UserController::class)->parameters(['usuarios' => 'user'])->middleware('role:admin');
+
+    Route::resource('reservas', App\Http\Controllers\ReservaController::class)->parameters(['reservas' => 'reserva']);
 });
 
 Auth::routes();

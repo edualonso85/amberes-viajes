@@ -1,7 +1,8 @@
 <div>
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-bold">Proveedores</h1>
-        <button wire:click="abrirModalCrear" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Nuevo Proveedor</button>
+        <button wire:click="abrirModalCrear" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Nuevo
+            Proveedor</button>
     </div>
     <div class="overflow-x-auto rounded shadow">
         <table class="min-w-full bg-white border border-gray-200">
@@ -15,23 +16,26 @@
             </thead>
             <tbody>
                 @foreach($proveedores as $proveedor)
-                <tr class="hover:bg-blue-50 {{ $loop->even ? 'bg-gray-50' : '' }}">
-                    <td class="py-2 px-4 border-b">{{ $proveedor->nombre }}</td>
-                    <td class="py-2 px-4 border-b">{{ $proveedor->telefono }}</td>
-                    <td class="py-2 px-4 border-b">{{ $proveedor->email }}</td>
-                    <td class="py-2 px-4 border-b">
-                        <button wire:click="abrirModalEditar({{ $proveedor->id }})" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded mr-2 text-sm cursor-pointer">Editar</button>
-                        <button wire:click="confirmarEliminar({{ $proveedor->id }})" class="inline-block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm cursor-pointer">Eliminar</button>
-                    </td>
-                </tr>
+                    <tr class="hover:bg-blue-50 {{ $loop->even ? 'bg-gray-50' : '' }}">
+                        <td class="py-2 px-4 border-b">{{ $proveedor->nombre }}</td>
+                        <td class="py-2 px-4 border-b">{{ $proveedor->telefono }}</td>
+                        <td class="py-2 px-4 border-b">{{ $proveedor->email }}</td>
+                        <td class="py-2 px-4 border-b">
+                            <button wire:click="abrirModalEditar({{ $proveedor->id }})"
+                                class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded mr-2 text-sm cursor-pointer">Editar</button>
+                            <button wire:click="confirmarEliminar({{ $proveedor->id }})"
+                                class="inline-block bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm cursor-pointer">Eliminar</button>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 
     <!-- Modal -->
-    <div x-data="{ show: @entangle('modal') }" x-show="show" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50" style="display: none;">
-        <div class="bg-white p-8 rounded shadow-lg w-full max-w-md">
+    <div x-data="{ show: @entangle('modal') }" x-show="show"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50" style="display: none;">
+        <div class="bg-white p-8 rounded shadow-lg w-full max-w-md" @click.self="show = false; $wire.cerrarModal()">
             <h2 class="text-xl font-bold mb-4">{{ $modoEdicion ? 'Editar Proveedor' : 'Nuevo Proveedor' }}</h2>
             <form wire:submit.prevent="guardarProveedor">
                 <div class="mb-4">
@@ -49,8 +53,10 @@
                     @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end gap-2">
-                    <button type="button" @click="show = false; $wire.cerrarModal()" class="bg-gray-300 px-4 py-2 rounded cursor-pointer">Cancelar</button>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">{{ $modoEdicion ? 'Actualizar' : 'Guardar' }}</button>
+                    <button type="button" @click="show = false; $wire.cerrarModal()"
+                        class="bg-gray-300 px-4 py-2 rounded cursor-pointer">Cancelar</button>
+                    <button type="submit"
+                        class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">{{ $modoEdicion ? 'Actualizar' : 'Guardar' }}</button>
                 </div>
             </form>
         </div>

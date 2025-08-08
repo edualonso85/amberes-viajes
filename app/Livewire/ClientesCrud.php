@@ -9,11 +9,12 @@ use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 class ClientesCrud extends Component
 {
     // use LivewireAlert;
-    
+
     public $clientes;
     public $nombre;
     public $telefono;
     public $email;
+    public $fecha_nacimiento;
     public $cliente_id;
     public $modal; // Definir sin valor por defecto
 
@@ -27,6 +28,7 @@ class ClientesCrud extends Component
         'nombre' => 'required',
         'telefono' => 'nullable',
         'email' => 'nullable|email',
+        'fecha_nacimiento' => 'nullable|date',
     ];
 
     public function render()
@@ -37,7 +39,7 @@ class ClientesCrud extends Component
 
     public function abrirModalCrear()
     {
-        $this->reset(['nombre', 'telefono', 'email', 'cliente_id', 'modoEdicion']);
+        $this->reset(['nombre', 'telefono', 'email', 'fecha_nacimiento', 'cliente_id', 'modoEdicion']);
         $this->modal = true;
     }
 
@@ -48,6 +50,7 @@ class ClientesCrud extends Component
         $this->nombre = $cliente->nombre;
         $this->telefono = $cliente->telefono;
         $this->email = $cliente->email;
+        $this->fecha_nacimiento = $cliente->fecha_nacimiento;
         $this->modoEdicion = true;
         $this->modal = true;
     }
@@ -61,16 +64,18 @@ class ClientesCrud extends Component
                 'nombre' => $this->nombre,
                 'telefono' => $this->telefono,
                 'email' => $this->email,
+                'fecha_nacimiento' => $this->fecha_nacimiento,
             ]);
         } else {
             Cliente::create([
                 'nombre' => $this->nombre,
                 'telefono' => $this->telefono,
                 'email' => $this->email,
+                'fecha_nacimiento' => $this->fecha_nacimiento,
             ]);
         }
         $this->cerrarModal();
-        LivewireAlert::title('Item Saved')
+        LivewireAlert::title('Cliente Guardado')
             ->text('El cliente ha sido guardado correctamente en la base de datos.')
             ->toast()
             ->timer(2000)
@@ -89,7 +94,7 @@ class ClientesCrud extends Component
     public function cerrarModal()
     {
         $this->modal = false;
-        $this->reset(['nombre', 'telefono', 'email', 'cliente_id', 'modoEdicion']);
+        $this->reset(['nombre', 'telefono', 'email', 'fecha_nacimiento', 'cliente_id', 'modoEdicion']);
     }
 
     public function confirmarEliminar($id)
